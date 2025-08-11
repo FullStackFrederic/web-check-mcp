@@ -11,7 +11,9 @@
     "dev:netlify": "PLATFORM='netlify' npx netlify dev",
     "dev:api": "DISABLE_GUI='true' PORT='3001' nodemon server",
     "dev:astro": "PUBLIC_API_ENDPOINT=http://localhost:3001/api astro dev",
-    "dev": "concurrently -c magenta,cyan -n backend,frontend 'yarn dev:api' 'yarn dev:astro'"
+    "dev": "concurrently -c magenta,cyan -n backend,frontend 'yarn dev:api' 'yarn dev:astro'",
+    "mcp": "node mcp-server.js",
+    "start:prod": "if [ \"$ENABLE_MCP\" = \"true\" ]; then pm2 start pm2.config.cjs --only web-check,web-check-mcp && pm2 logs; else pm2 start pm2.config.cjs --only web-check && pm2 logs; fi"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -23,6 +25,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/svelte-fontawesome": "^0.2.2",
+    "@modelcontextprotocol/sdk": "^1.17.2",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "astro": "^4.7.1",
@@ -55,7 +58,8 @@
     "unzipper": "^0.11.5",
     "url-parse": "^1.5.10",
     "wappalyzer": "^6.10.65",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@astrojs/cloudflare": "^10.2.5",

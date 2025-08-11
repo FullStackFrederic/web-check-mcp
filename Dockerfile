@@ -58,5 +58,8 @@ EXPOSE ${PORT:-3000}
 # Set the environment variable CHROME_PATH to specify the path to the Chromium binaries
 ENV CHROME_PATH='/usr/bin/chromium'
 
-# Define the command executed when the container starts and start the server.js of the Node.js application
-CMD ["yarn", "start"]
+# Environment toggle for MCP server (default disabled)
+ENV ENABLE_MCP="false"
+
+# Start command: if ENABLE_MCP=true run both via pm2, else original server
+CMD ["bash", "-c", "if [ \"$ENABLE_MCP\" = \"true\" ]; then yarn start:prod; else yarn start; fi"]
