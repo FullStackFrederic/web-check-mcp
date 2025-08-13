@@ -1,6 +1,8 @@
 // MCP server exposing selected Web-Check API endpoints as tools
 // Uses @modelcontextprotocol/sdk with stdio transport for compatibility with Claude Desktop and other STDIO hosts.
-import { McpServer, StdioServerTransport } from "@modelcontextprotocol/sdk";
+// NOTE: The SDK does not export a package root entry. Import specific subpaths.
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import fs from "fs";
 import path from "path";
